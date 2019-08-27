@@ -1,0 +1,56 @@
+@model Hobby
+
+<a asp-action="Dashboard">Dashboard</a>
+
+<h1>@Model.Name</h1>
+
+<h4>Description:</h4>
+<p>@Model.Description</p>
+
+<a asp-action="EditHobby" asp-route-HobbyId="@Model.HobbyId"><button>Edit Hobby</button></a>
+
+<br>
+<br>
+
+<h5>@Model.Name Enthusiasts</h5>
+
+<table class="table table-hover">
+<thead class="thead thead-dark">
+    <tr>
+        <th>Name</th>
+        <th>Proficiency</th>
+    </tr>
+</thead>
+<tbody>
+@foreach(var enthusiast in Model.Enthusiasts)
+{
+    <tr>
+        <td>@enthusiast.User.FirstName</td>
+        <td>@enthusiast.User.Proficiency</td>
+    </tr>
+}
+</tbody>
+</table>
+
+
+@if(ViewBag.current_user == Model.Creator.UserId){
+    <a asp-action="DeleteHobby" asp-route-HobbyId="@Model.HobbyId"><button>Delete</button></a>
+} else {
+    <p>Become an Enthusiast!</p>
+    <br><br>
+
+    @if(Model.Enthusiasts.FirstOrDefault(h => h.UserId == ViewBag.current_user) == null)
+    {
+
+        <select>
+            <option value="Novice">Novice</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Expert">Expert</option>
+        </select>
+        <br><br>
+        <a asp-action="AddToHobbies" asp-route-HobbyId="@Model.HobbyId"><button>Add to Hobbies</button></a>
+
+    } else {
+        <a asp-action="RemoveFromHobbies" asp-route-HobbyId="@Model.HobbyId"><button>Remove from Hobbies</button></a>
+    }
+}

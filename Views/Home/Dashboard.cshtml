@@ -1,0 +1,49 @@
+<div class="navbar">
+    <a class="logout" asp-action="Logout">Logout</a>
+    <h1 class="nav-item">Dojo Hobby Hub</h1>
+    <h4 class="nav-item">Welcome, @ViewBag.FirstName</h4>
+    <br>
+</div>
+
+@model List<Hobby>;
+
+<h1>Hobbies</h1>
+
+<table class="table table-hover">
+    <thead class="thead thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Enthusiasts</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var hobby in Model)
+        {
+        <tr>
+            <td>
+                <a asp-action="ShowHobby" asp-route-HobbyId="@hobby.HobbyId">@hobby.Name</a>
+            </td>
+            <td>@hobby.Enthusiasts.Count</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<!-- <div>
+    <h5>Top Novice:</h5>
+    <ul>
+        <li>Hiking</li>
+    </ul>
+    
+    <h5>Top Intermediate:</h5>
+    <ul>
+        <li>Rope Swing</li>
+    </ul>
+    
+    <h5>Top Expert:</h5>
+    <ul>
+        <li></li>
+    </ul>
+</div> -->
+
+<a asp-action="newHobby" class="newHobby">Create New Hobby</a>

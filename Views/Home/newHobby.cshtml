@@ -1,0 +1,17 @@
+@model Hobby
+
+<h1 class="center">Create a Hobby</h1>
+
+<form asp-action="createHobby" controller="Home" method="POST">
+    
+    <label asp-for="Name"></label><br>
+    <span class="error" asp-validation-for="Name"></span>
+    <input class="form-control" asp-for="Name" type="text">
+
+    <label asp-for="Description"></label><br>
+    <span class="error" asp-validation-for="Description"></span>
+    <textarea asp-for="Description" cols="150" rows="5"></textarea>
+
+    <br><br>
+    <button>Create</button>
+</form>
